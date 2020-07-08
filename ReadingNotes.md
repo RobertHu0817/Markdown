@@ -86,4 +86,56 @@ public static void main(String[] args) throws NoSuchFieldException, SecurityExce
 Spring AOP：动态代理，可以基于 JDK 动态代理（Proxy 类，必须实现接口，底层通过反射实现）或者 CGLIB（底层通过继承实现） 实现，每次运行生成代理类，性能稍差，且只能作用于方法级别
 AspectJ：静态代理，需借助特定编译器，性能更好，能获得更细粒度的控制
 
-> Spring 仅支持 AspectJ 切点指示器(pointcut designator)的一个子集
+> Spring 仅支持 AspectJ 切点指示器(pointcut designator)的一个子集，使用其来定义 Spring 切面：
+<table>
+    <tr>
+        <td>AspectJ 指示器</td>
+        <td>描述</td>
+    </tr>
+    <tr>
+        <td>arg()</td>
+    	<td>限制连接点匹配参数为指定类型的执行方法</td>
+    </tr>
+    <tr>
+        <td>@args()</td>
+    	<td>限制连接点匹配参数由指定注解标注的执行方法</td>
+    </tr>
+    <tr>
+        <td>execution()</td>
+    	<td>用于匹配是连接点的执行方法</td>
+    </tr>
+    <tr>
+        <td>this()</td>
+    	<td>限制连接点匹配 AOP 代理的 bean 引用为指定类型的类</td>
+    </tr>
+    <tr>
+        <td>target</td>
+    	<td>限制连接点匹配目标对象为指定类型的类</td>
+    </tr>
+    <tr>
+        <td>@target()</td>
+    	<td>限制连接点匹配特定的执行对象，这些对象对应的类要具有指定类型的注解</td>
+    </tr>
+    <tr>
+        <td>within()</td>
+    	<td>限制连接点匹配指定的类型</td>
+    </tr>
+    <tr>
+        <td>@within()</td>
+    	<td>限制连接点匹配指定注解所标注的类型（当使用 Spring AOP 时，方法定义在由指定注解所标注的类里）</td>
+    </tr>
+     <tr>
+        <td>@annotation</td>
+    	<td>限定匹配带有指定注解的连接点</td>
+    </tr>
+</table>
+> 只有 execution 指示器是实际执行匹配的，而其他的指示器都是用来限制匹配的。这说明 execution 指示器是我们在编写切点定义时最主要使用的指示器。在此基础上，我们使用其他指示器来限制所匹配的切点。
+
+> Spring 使用 AspectJ 注解来声明通知方法：
+> * @After
+> * @AfterReturning
+> * @AfterThrowing
+> * @Around
+> * @Before
+
+ 
