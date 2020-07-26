@@ -148,3 +148,17 @@ AspectJ：静态代理，需借助特定编译器，性能更好，能获得更�
 		*Base class for org.springframework.web.WebApplicationInitializerimplementations that register a DispatcherServlet in the servlet context*
 			**<<- AbstractAnnotationConfigDispatcherServletInitializer**
 			*WebApplicationInitializerto register a DispatcherServlet and use Java-based Spring configuration*
+
+> 通过 AbstractAnnotationConfigDispatcherServletInitializer 来配置 DispatcherServlet 是传统 web.xml 方式的替代方法——也可以搭配使用，不过没有必要
+
+> 当使用 Spring Security 注解时，会使用基于 AspectJ 的切面，而不是使用标准的 Spring AOP
+
+> springSecurityFilterChain 本身是另一个特殊的 Filter，它也被称为 FilterChainProxy。它可以链接任意一个或多个其他的 Filter。Spring Security 依赖一系列 Servlet Filter 来提供不同的安全特性。但是，你几乎不需要知道这些细节，因为你不需要显式声明 springSecurityFilterChain 以及它所链接在一起的其他 Filter。当我们启用 Web 安全性的时候，会自动创建这些 Filter。
+
+springSecurityFilterChain 是一个可以深挖的内容，后续可以研究一下 #TODO#
+
+
+---------------有点跳--------------------
+> @ResponseBody 注解会告知 Spring，我们要将返回的对象作为资源发送给客户端，并将其转换为客户端可接受的表述形式。更具体地讲，DispatcherServlet 将会考虑到请求中 Accept 头部信息，并查找能够为客户端提供所需表述形式的消息转换器。与之类似，@RequestBody 也能告诉 Spring 查找一个消息转换器（根据请求中的 Content-Type 头部信息），将来自客户端的资源表述转换为对象。
+
+>
